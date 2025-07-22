@@ -1,8 +1,6 @@
 # Mathematical Equation Solver
 
 ### <a name="objectifs"></a> objectifs
-
-
 > the Python program that can solve a wide range of mathematical expressions and equations using `sympy`.
 
 
@@ -18,7 +16,7 @@ or
 
 > [!IMPORTANT]
 > use `command prompt` to install resources.
-
+> Make sure `numpy` is installed.
 
 </p>
 <h3 align="center">Math Solver Code</h3>
@@ -26,9 +24,9 @@ or
 </p>
 
 > [!TIP]
-> Make sure `numpy` is installed.
+> It is mandatory to use VS Code to save and run the project.
 
-zzz ≠ 0 :
+version 1 :
 
 ```shell
 import sympy as sp
@@ -59,9 +57,46 @@ if __name__ == "__main__":
 # by : tknohamza
 ```
 
-> [!NOTE]
-> ### ✅ **Supported Operations**
+version 2 :
 
+```shell
+import sympy as sp
+
+def main():
+    print("Mathematical Equation Solver")
+    print("Enter a mathematical expression or equation (e.g., x**2 + 2*x - 3 = 0)")
+    user_input = input("Your input: ")
+
+    try:
+        # Check if it's an equation
+        if '=' in user_input:
+            lhs, rhs = user_input.split('=')
+            lhs_expr = sp.sympify(lhs)
+            rhs_expr = sp.sympify(rhs)
+            equation = sp.Eq(lhs_expr, rhs_expr)
+
+            # Detect variables in the expression
+            variables = list(lhs_expr.free_symbols.union(rhs_expr.free_symbols))
+            solution = sp.solve(equation, *variables)
+        else:
+            # Simplify an expression
+            expr = sp.sympify(user_input)
+            solution = sp.simplify(expr)
+
+        print("Result:", solution)
+
+    except Exception as e:
+        print("Error: Invalid input. Please ensure the expression is correct.")
+        print("Details:", e)
+
+if __name__ == "__main__":
+    main()
+
+# by : tknohamza
+```
+
+> [!NOTE]
+> Supported Operations :
 You can input:
 - Algebraic equations like `x**2 - 4 = 0`
 - Expressions for simplification: `2*(x + 1) - x`
@@ -69,7 +104,6 @@ You can input:
 - Integrals: `integrate(sin(x)*x, x)`
 - Limits: `limit(sin(x)/x, x, 0)`
 - Solving linear systems (with a small extension)
-
 
 ```
 # exemple :
